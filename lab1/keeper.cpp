@@ -1,43 +1,51 @@
 #include "keeper.h"
 
-
-Base::Base(const string& name, double cost, int quantity, const string& owner): name(name), cost(cost), quantity(quantity), owner(owner) {}
-
-void Base::displayInfo() const {
-    cout << "Name: " << name << endl;
-    cout << "Cost: " << cost << endl;
-    cout << "Quantity: " << quantity << endl;
-    cout << "Owner: " << owner << endl;
+Keeper::Keeper(int capacity){
+    instruments = new Base*[capacity];
+    numInstruments = 0;
 }
 
-Drum::Drum(const string& name, double cost, int quantity, const string& owner, const string& type): Base(name, cost, quantity, owner), type(type) {}
-
-void Drum::displayInfo() const{
-    cout << "Type: " << type << endl;
-    Base::displayInfo();
-}
-string Drum::getType() const{
-    return "Drum";
+Keeper::~Keeper() {
+    for (int i = 0; i < numInstruments; ++i) {
+        delete instruments[i];
+    }
+    delete[] instruments;
 }
 
-Stringed::Stringed(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& description): Base(name, cost, quantity, owner), manufacturer(manufacturer), description(description) {}
+void Keeper::addInstrument(Base* instrument) {
+    if (numInstruments < capacity) {
+        instruments[numInstruments] = instrument;
+        numInstruments++;
+    } else {
+        //user input capacity = capacity is limited?
+        //or capacity is not limited and dynamically rearranged? 
+    }
+}
 
-void Stringed::displayInfo() const{
-    Base::displayInfo();
-    cout << "Manufacturer: " << manufacturer << endl;
-    cout << "Description: " << description << endl;
-}
-string Stringed::getType() const{
-    return "Stringed";
+void Keeper::removeInstrument(int index) {
+    if (index >= 0 && index < numInstruments) {
+        delete instruments[index];
+        for (int i = index; i < numInstruments - 1; i++) {
+            instruments[i] = instruments[i + 1];
+        }
+        numInstruments--;
+    }
 }
 
-Brass::Brass(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& defects): Base(name, cost, quantity, owner), manufacturer(manufacturer), defects(defects) {}
+void Keeper::displayAllInstruments() {
+    for (int i = 0; i < numInstruments; ++i) {
+        instruments[i]->displayInfo();
+    }
+}
+int Keeper::getNumInstruments(){
+        return numInstruments;
+    }
 
-void Brass::displayInfo() const{
-    Base::displayInfo();
-    cout << "Manufacturer: " << manufacturer << endl;
-    cout << "Defects: " << defects << endl;
-}
-string Brass::getType() const{
-    return "Brass";
-}
+Base* Keeper::getInstrument(int index) {
+        if (index >= 0 && index < numInstruments) {
+            return instruments[index];
+        } else {
+            //
+            return nullptr; //
+        }
+    }
