@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CLASSES_H
 #define CLASSES_H
 
@@ -7,13 +8,15 @@
 
 using namespace std;
 
-class Base{
+class Base {
 public:
-    Base(const string& name, double cost, int quantity, const string& owner): name(name), cost(cost), quantity(quantity), owner(owner) {}
-    
+    Base(const string& name, double cost, int quantity, const string& owner);
+
+    virtual ~Base();
+
     virtual void displayInfo() const;
     virtual void displayInfoToFile(ostream& output) const;
-    virtual string getType() const=0;
+    virtual string getType() const = 0;
 
 protected:
     string name;
@@ -22,22 +25,22 @@ protected:
     string owner;
 };
 
-class Drum : public Base{
+class Drum : public Base {
 public:
-    Drum(const string& name, double cost, int quantity, const string& owner, const string& type);
-    
+    Drum(const string& name, double cost, int quantity, const string& owner, const string& drumType);
+
     virtual void displayInfo() const override;
     virtual void displayInfoToFile(ostream& output) const override;
     string getType() const override;
 
 private:
-    string type;
+    string drumType;
 };
 
-class Stringed : public Base{
+class Stringed : public Base {
 public:
     Stringed(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& description);
-    
+
     virtual void displayInfo() const override;
     virtual void displayInfoToFile(ostream& output) const override;
     string getType() const override;
@@ -47,7 +50,7 @@ private:
     string description;
 };
 
-class Brass : public Base{
+class Brass : public Base {
 public:
     Brass(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& defects);
 

@@ -1,0 +1,17 @@
+Instrument 1 (Drum):
+---------------------------
+Name: Baraban
+Cost: 10
+Quantity: 2
+Owner: mk
+Type of drum: dar
+---------------------------
+Instrument 2 (Stringed):
+---------------------------
+Name: struna
+Cost: 10
+Quantity: 3
+Owner: km
+Manufacturer: ralgavnozavod
+Description: uitara)
+---------------------------
