@@ -17,6 +17,7 @@ public:
     virtual void displayInfo() const;
     virtual void displayInfoToFile(ostream& output) const;
     virtual string getType() const = 0;
+    virtual void edit();
 
 protected:
     string name;
@@ -31,6 +32,7 @@ public:
 
     virtual void displayInfo() const override;
     virtual void displayInfoToFile(ostream& output) const override;
+    virtual void edit() override;
     string getType() const override;
 
 private:
@@ -43,6 +45,7 @@ public:
 
     virtual void displayInfo() const override;
     virtual void displayInfoToFile(ostream& output) const override;
+    virtual void edit() override;
     string getType() const override;
 
 private:
@@ -56,6 +59,7 @@ public:
 
     virtual void displayInfo() const override;
     virtual void displayInfoToFile(ostream& output) const override;
+    virtual void edit() override;
     string getType() const override;
 
 private:

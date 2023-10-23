@@ -2,8 +2,8 @@
 #include "keeper.h"
 
 Keeper::Keeper() {
-    capacity = 10;
-    instruments = new Base * [capacity];
+    //capacity = 10;
+    instruments = new Base * [0];
     numInstruments = 0;
 }
 
@@ -93,10 +93,12 @@ void Keeper::saveToFile(const string& filename) const {
         int numInstruments = getNumInstruments();
         for (int i = 0; i < numInstruments; ++i) {
             const Base* instrument = getInstrument(i);
-            file << "Instrument " << i + 1 << " (" << instrument->getType() << "):" << endl;
-            file << "---------------------------" << endl;
-            instrument->displayInfoToFile(file);
-            file << "---------------------------" << endl;
+            if (instrument) {
+                file << "Instrument " << i + 1 << " (" << instrument->getType() << "):" << endl;
+                file << "---------------------------" << endl;
+                instrument->displayInfoToFile(file);
+                file << "---------------------------" << endl;
+            }
         }
         file.close();
         cout << "Instruments saved to " << filename << " successfully." << endl;
@@ -116,7 +118,6 @@ void Keeper::loadFromFile(const string& filename) {
                 size_t colonPos = line.find(":");
                 if (colonPos != string::npos) {
                     capacity = stoi(line.substr(colonPos + 1));
-                    break;
                 }
             }
             else if (line.find("Instrument") != string::npos) {

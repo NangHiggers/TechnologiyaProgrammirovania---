@@ -2,12 +2,22 @@
 #include <fstream>
 #include "keeper.h"
 #include "classes.h"
+#include <conio.h>
 
 using namespace std;
 
+void displayMenu() {
+    cout << "<---------Menu---------->" << endl;
+    cout << "1. Add instrument" << endl;
+    cout << "2. Delete instrument" << endl;
+    cout << "3. Show instruments" << endl;
+    cout << "4. Save instruments to file" << endl;
+    cout << "5. Load instruments from file" << endl;
+    cout << "8. Exit programm" << endl;
+}
+
 void commonChoices(string& name, double& cost, int& quantity, string& owner) {
     cout << "Enter name: ";
-    cin.ignore();
     getline(cin, name);
     cout << "Enter cost: ";
     cin >> cost;
@@ -26,14 +36,11 @@ int main() {
 
     int choice;
     do {
-        cout << "<---------Menu---------->" << endl;
-        cout << "1. Add instrument" << endl;
-        cout << "2. Delete instrument" << endl;
-        cout << "3. Show instruments" << endl;
-        cout << "4. Save instruments to file" << endl;
-        cout << "5. Load instruments from file" << endl;
-        cout << "8. Exit programm" << endl;
+        system("cls");
+        displayMenu();
+
         cin >> choice;
+        cin.ignore();
         switch (choice) {
         case 1:
             if (flag == false) {
@@ -48,7 +55,9 @@ int main() {
                 cout << "1. Drum" << endl;
                 cout << "2. Stringed" << endl;
                 cout << "3. Brass" << endl;
+                cout << "4. Cancel" << endl;
                 cin >> typeChoice;
+                cin.ignore();
 
                 Base* newInstrument = nullptr;
 
@@ -60,38 +69,37 @@ int main() {
                 string manufacturer;
                 string description;
                 string defects;
-
-                commonChoices(name, cost, quantity, owner);
-
+                if (typeChoice > 0 && typeChoice < 4) {
+                    commonChoices(name, cost, quantity, owner);
+                }
                 switch (typeChoice) {
                 case 1:
 
                     cout << "Enter type: ";
-                    cin.ignore();
                     getline(cin, drumType);
 
                     newInstrument = new Drum(name, cost, quantity, owner, drumType);
                     break;
                 case 2:
                     cout << "Enter manufacturer: ";
-                    cin.ignore();
                     getline(cin, manufacturer);
                     cout << "Enter description: ";
-                    cin.ignore();
                     getline(cin, description);
 
                     newInstrument = new Stringed(name, cost, quantity, owner, manufacturer, description);
                     break;
                 case 3:
                     cout << "Enter manufacturer: ";
-                    cin.ignore();
                     getline(cin, manufacturer);
                     cout << "Enter defects: ";
-                    cin.ignore();
                     getline(cin, defects);
 
                     newInstrument = new Brass(name, cost, quantity, owner, manufacturer, defects);
                     break;
+                case 4:
+                    cout << "Operation canceled, exiting menu..." << endl;
+                    _getch();
+                    continue;
                 default:
                     cout << "Incorrect choice, please try again." << endl;
                     continue;
@@ -130,10 +138,31 @@ int main() {
 
                 cout << "List of instruments:" << endl;
                 for (int i = 0; i < numInstruments; ++i) {
-                    const Base* instrument = keeper.getInstrument(i);
+                    Base* instrument = keeper.getInstrument(i);
                     cout << "Instrument " << i + 1 << " (" << instrument->getType() << "):" << endl;
                     instrument->displayInfo();
                     cout << "---------------------------" << endl;
+                }
+
+                int editOption;
+                cout << "Choose an option:" << endl;
+                cout << "1. Edit an instrument" << endl;
+                cout << "2. Return to the main menu" << endl;
+                cin >> editOption;
+
+                if (editOption == 1) {
+                    int editIndex;
+                    cout << "Enter the index of the instrument you want to edit (1 to " << numInstruments << "): ";
+                    cin >> editIndex;
+                    cin.ignore();
+
+                    if (editIndex >= 1 && editIndex <= numInstruments) {
+                        Base* instrumentToEdit = keeper.getInstrument(editIndex - 1);
+                        instrumentToEdit->edit();
+                    }
+                    else {
+                        cout << "Invalid instrument index." << endl;
+                    }
                 }
             }
             else {
@@ -147,10 +176,14 @@ int main() {
             keeper.loadFromFile(filename);
             flag = true;
             break;
+        case 8:
+            continue;
         default:
             cout << "Incorrect choice, please try again." << endl;
 
         }
+        cout << "Press any key to continue...";
+        _getch();
     } while (choice != 8);
 
     return 0;

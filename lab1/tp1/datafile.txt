@@ -1,17 +1,18 @@
+Capacity: 2
 Instrument 1 (Drum):
 ---------------------------
-Name: Baraban
-Cost: 10
-Quantity: 2
-Owner: mk
-Type of drum: dar
----------------------------
-Instrument 2 (Stringed):
----------------------------
-Name: struna
-Cost: 10
+Name: AME
+Cost: 2304
 Quantity: 3
-Owner: km
-Manufacturer: ralgavnozavod
-Description: uitara)
+Owner: SASHA
+Type of drum: KREKER
+---------------------------
+Instrument 2 (Brass):
+---------------------------
+Name: Name
+Cost: 300
+Quantity: 2
+Owner: kirill
+Manufacturer: yamaha
+Defects: broken limb
 ---------------------------
