@@ -10,17 +10,17 @@ public:
     Keeper(int capacity);
     ~Keeper();
 
-    void addInstrument(Base* instrument);
+    void addInstrument(Orchestra* instrument);
     void removeInstrument(int index);
     void displayAllInstruments();
     int getNumInstruments() const;
-    Base* getInstrument(int index) const;
+    Orchestra* getInstrument(int index) const;
     void saveToFile(const string& filename) const;
     void loadFromFile(const string& filename);
     void setCapacity(int newCapacity);
 
 private:
-    Base** instruments;
+    Orchestra** instruments;
     int capacity;
     int numInstruments;
 };

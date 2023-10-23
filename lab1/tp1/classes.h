@@ -8,11 +8,11 @@
 
 using namespace std;
 
-class Base {
+class Orchestra {
 public:
-    Base(const string& name, double cost, int quantity, const string& owner);
+    Orchestra(const string& name, double cost, int quantity, const string& owner);
 
-    virtual ~Base();
+    virtual ~Orchestra();
 
     virtual void displayInfo() const;
     virtual string getType() const = 0;
@@ -20,7 +20,7 @@ public:
     virtual ostream& displayInfoToFile(ostream& output) const;
 
 
-    friend ostream& operator<<(ostream& output, const Base& obj);
+    friend ostream& operator<<(ostream& output, const Orchestra& obj);
 
 protected:
     string name;
@@ -29,7 +29,7 @@ protected:
     string owner;
 };
 
-class Drum : public Base {
+class Drum : public Orchestra {
 public:
     Drum(const string& name, double cost, int quantity, const string& owner, const string& drumType);
     
@@ -43,7 +43,7 @@ private:
     string drumType;
 };
 
-class Stringed : public Base {
+class Stringed : public Orchestra {
 public:
     Stringed(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& description);
     
@@ -58,7 +58,7 @@ private:
     string description;
 };
 
-class Brass : public Base {
+class Brass : public Orchestra {
 public:
     Brass(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& defects);
     

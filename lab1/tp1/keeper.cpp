@@ -3,7 +3,7 @@
 
 Keeper::Keeper() {
     //capacity = 10;
-    instruments = new Base * [0];
+    instruments = new Orchestra * [0];
     numInstruments = 0;
 }
 
@@ -11,7 +11,7 @@ Keeper::Keeper(int capacity) {
     if (capacity <= 0) {
         throw invalid_argument("Capacity must be a positive value.");
     }
-    instruments = new Base * [capacity];
+    instruments = new Orchestra * [capacity];
     numInstruments = 0;
 }
 
@@ -22,7 +22,7 @@ Keeper::~Keeper() {
     delete[] instruments;
 }
 
-void Keeper::addInstrument(Base* instrument) {
+void Keeper::addInstrument(Orchestra* instrument) {
     if (numInstruments < capacity) {
         instruments[numInstruments] = instrument;
         numInstruments++;
@@ -40,7 +40,7 @@ void Keeper::addInstrument(Base* instrument) {
                 throw invalid_argument("New capacity must be greater than the current capacity.");
             }
             else {
-                Base** newInstruments = new Base * [newCapacity];
+                Orchestra** newInstruments = new Orchestra * [newCapacity];
                 for (int i = 0; i < numInstruments; ++i) {
                     newInstruments[i] = instruments[i];
                 }
@@ -80,7 +80,7 @@ int Keeper::getNumInstruments() const {
     return numInstruments;
 }
 
-Base* Keeper::getInstrument(int index) const {
+Orchestra* Keeper::getInstrument(int index) const {
     if (index >= 0 && index < numInstruments) {
         return instruments[index];
     }
@@ -96,7 +96,7 @@ void Keeper::saveToFile(const string& filename) const {
 
         int numInstruments = getNumInstruments();
         for (int i = 0; i < numInstruments; ++i) {
-            const Base* instrument = getInstrument(i);
+            const Orchestra* instrument = getInstrument(i);
             if (instrument) {
                 file << "Instrument " << i + 1 << " (" << instrument->getType() << "):" << endl;
                 file << "---------------------------" << endl;

@@ -1,6 +1,6 @@
 #include "classes.h"
 
-Base::Base(const string& name, double cost, int quantity, const string& owner) : name(name), cost(cost), quantity(quantity), owner(owner) {
+Orchestra::Orchestra(const string& name, double cost, int quantity, const string& owner) : name(name), cost(cost), quantity(quantity), owner(owner) {
     if (cost < 0) {
         throw invalid_argument("Cost cannot be negative.");
     }
@@ -8,27 +8,27 @@ Base::Base(const string& name, double cost, int quantity, const string& owner) :
         throw invalid_argument("Quantity cannot be negative.");
     }
 
-    cout << "Called Base constructor" << endl;
+    cout << "Called Orchestra constructor" << endl;
 }
 
-Base::~Base() {
-    cout << "Called Base destructor" << endl;
+Orchestra::~Orchestra() {
+    cout << "Called Orchestra destructor" << endl;
 }
 
-void Base::displayInfo() const {
+void Orchestra::displayInfo() const {
     cout << "Name: " << name << endl;
     cout << "Cost: " << cost << endl;
     cout << "Quantity: " << quantity << endl;
     cout << "Owner: " << owner << endl;
 }
-void Base::edit() {
+void Orchestra::edit() {
     cout << "Select the parameter to edit:" << endl;
     cout << "1. Name" << endl;
     cout << "2. Cost" << endl;
     cout << "3. Quantity" << endl;
     cout << "4. Owner" << endl;
 }
-ostream& Base::displayInfoToFile(ostream& output) const {
+ostream& Orchestra::displayInfoToFile(ostream& output) const {
     output << "Name: " << name << endl;
     output << "Cost: " << cost << endl;
     output << "Quantity: " << quantity << endl;
@@ -36,7 +36,7 @@ ostream& Base::displayInfoToFile(ostream& output) const {
     return output;
 }
 
-Drum::Drum(const string& name, double cost, int quantity, const string& owner, const string& drumType) : Base(name, cost, quantity, owner), drumType(drumType) {
+Drum::Drum(const string& name, double cost, int quantity, const string& owner, const string& drumType) : Orchestra(name, cost, quantity, owner), drumType(drumType) {
     cout << "Called Drum constructor" << endl;
 }
 
@@ -45,12 +45,12 @@ Drum::~Drum() {
 }
 
 void Drum::displayInfo() const {
-    Base::displayInfo();
+    Orchestra::displayInfo();
     cout << "Type of drum: " << drumType << endl;
 }
 void Drum::edit() {
     int editParameter;
-    Base::edit();
+    Orchestra::edit();
     cout << "5. Drum Type" << endl;
     cin >> editParameter;
 
@@ -98,7 +98,7 @@ void Drum::edit() {
     }
 }
 ostream& Drum::displayInfoToFile(ostream& output) const {
-    Base::displayInfoToFile(output);
+    Orchestra::displayInfoToFile(output);
     output << "Type of drum: " << drumType << endl;
     return output;
 }
@@ -106,7 +106,7 @@ string Drum::getType() const {
     return "Drum";
 }
 
-Stringed::Stringed(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& description) : Base(name, cost, quantity, owner), manufacturer(manufacturer), description(description) {
+Stringed::Stringed(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& description) : Orchestra(name, cost, quantity, owner), manufacturer(manufacturer), description(description) {
     cout << "Called Stringed constructor" << endl;
 }
 Stringed::~Stringed() {
@@ -114,13 +114,13 @@ Stringed::~Stringed() {
 }
 
 void Stringed::displayInfo() const {
-    Base::displayInfo();
+    Orchestra::displayInfo();
     cout << "Manufacturer: " << manufacturer << endl;
     cout << "Description: " << description << endl;
 }
 void Stringed::edit() {
     int editParameter;
-    Base::edit();
+    Orchestra::edit();
     cout << "5. Manufacturer" << endl;
     cout << "6. Description" << endl;
     cin >> editParameter;
@@ -177,7 +177,7 @@ void Stringed::edit() {
     }
 }
 ostream& Stringed::displayInfoToFile(ostream& output) const {
-    Base::displayInfoToFile(output);
+    Orchestra::displayInfoToFile(output);
     output << "Manufacturer: " << manufacturer << endl;
     output << "Description: " << description << endl;
     return output;
@@ -186,7 +186,7 @@ string Stringed::getType() const {
     return "Stringed";
 }
 
-Brass::Brass(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& defects) : Base(name, cost, quantity, owner), manufacturer(manufacturer), defects(defects) {
+Brass::Brass(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& defects) : Orchestra(name, cost, quantity, owner), manufacturer(manufacturer), defects(defects) {
     cout << "Called Brass constructor" << endl;
 }
 Brass::~Brass() {
@@ -194,13 +194,13 @@ Brass::~Brass() {
 }
 
 void Brass::displayInfo() const {
-    Base::displayInfo();
+    Orchestra::displayInfo();
     cout << "Manufacturer: " << manufacturer << endl;
     cout << "Defects: " << defects << endl;
 }
 void Brass::edit() {
     int editParameter;
-    Base::edit();
+    Orchestra::edit();
     cout << "5. Manufacturer" << endl;
     cout << "6. Defects" << endl;
     cin >> editParameter;
@@ -257,7 +257,7 @@ void Brass::edit() {
     }
 }
 ostream& Brass::displayInfoToFile(ostream& output) const {
-    Base::displayInfoToFile(output);
+    Orchestra::displayInfoToFile(output);
     output << "Manufacturer: " << manufacturer << endl;
     output << "Defects: " << defects << endl;
     return output;
@@ -266,6 +266,6 @@ string Brass::getType() const {
     return "Brass";
 }
 
-ostream& operator<<(ostream& output, const Base& obj) {
+ostream& operator<<(ostream& output, const Orchestra& obj) {
     return obj.displayInfoToFile(output);
 }

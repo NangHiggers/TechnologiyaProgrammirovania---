@@ -70,7 +70,7 @@ int main() {
                     cin >> typeChoice;
                     cin.ignore();
 
-                    Base* newInstrument = nullptr;
+                    Orchestra* newInstrument = nullptr;
 
                     string name;
                     double cost;
@@ -153,7 +153,7 @@ int main() {
 
                     cout << "List of instruments:" << endl;
                     for (int i = 0; i < numInstruments; ++i) {
-                        Base* instrument = keeper.getInstrument(i);
+                        Orchestra* instrument = keeper.getInstrument(i);
                         cout << "Instrument " << i + 1 << " (" << instrument->getType() << "):" << endl;
                         instrument->displayInfo();
                         cout << "---------------------------" << endl;
@@ -172,7 +172,7 @@ int main() {
                         cin.ignore();
 
                         if (editIndex >= 1 && editIndex <= numInstruments) {
-                            Base* instrumentToEdit = keeper.getInstrument(editIndex - 1);
+                            Orchestra* instrumentToEdit = keeper.getInstrument(editIndex - 1);
                             instrumentToEdit->edit();
                         }
                         else {
