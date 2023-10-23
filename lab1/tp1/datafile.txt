@@ -25,3 +25,12 @@ Owner: mikhail
 Manufacturer: Ural Zavod
 Defects: broke the tube
 ---------------------------
+Instrument 4 (Stringed):
+---------------------------
+Name: Guitar
+Cost: 300
+Quantity: 2
+Owner: Nicolai
+Manufacturer: YamahanCo
+Description: electronic guitar, perfect for earcracking
+---------------------------

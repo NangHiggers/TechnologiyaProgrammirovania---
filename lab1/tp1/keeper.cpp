@@ -2,13 +2,11 @@
 #include "keeper.h"
 
 Keeper::Keeper() {
-    capacity = 0;
-    instruments = nullptr;
+    instruments = new Orchestra * [1];
     numInstruments = 0;
 }
 
 Keeper::Keeper(int capacity) {
-    this->capacity = capacity;
     if (capacity <= 0) {
         throw invalid_argument("Capacity must be a positive value.");
     }
@@ -22,20 +20,42 @@ Keeper::~Keeper() {
     }
     delete[] instruments;
 }
-void Keeper::addInstrument(Orchestra* instrument) {
-    if (numInstruments >= capacity) {
-        capacity = (capacity == 0) ? 1 : capacity * 2;
-        Orchestra** newInstruments = new Orchestra*[capacity];
-        for (int i = 0; i < numInstruments; ++i) {
-            newInstruments[i] = instruments[i];
-        }
-        delete[] instruments;
-        instruments = newInstruments;
-    }
 
-    instruments[numInstruments] = instrument;
-    numInstruments++;
-    cout << "Instrument added successfully." << endl;
+void Keeper::addInstrument(Orchestra* instrument) {
+    if (numInstruments < capacity) {
+        instruments[numInstruments] = instrument;
+        numInstruments++;
+        cout << "Instrument added successfully." << endl;
+    }
+    else {
+        cout << "Cannot add more instruments. Do you want to increase the capacity? (y/n): ";
+        char choice;
+        cin >> choice;
+        if (choice == 'y' || choice == 'Y') {
+            int newCapacity;
+            cout << "Enter the new capacity: ";
+            cin >> newCapacity;
+            if (newCapacity <= capacity) {
+                throw invalid_argument("New capacity must be greater than the current capacity.");
+            }
+            else {
+                Orchestra** newInstruments = new Orchestra * [newCapacity];
+                for (int i = 0; i < numInstruments; ++i) {
+                    newInstruments[i] = instruments[i];
+                }
+                delete[] instruments;
+                instruments = newInstruments;
+                capacity = newCapacity;
+
+                instruments[numInstruments] = instrument;
+                numInstruments++;
+                cout << "Instrument added successfully." << endl;
+            }
+        }
+        else {
+            cout << "Instrument not added." << endl;
+        }
+    }
 }
 
 void Keeper::removeInstrument(int index) {
