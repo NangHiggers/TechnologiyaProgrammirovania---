@@ -55,9 +55,9 @@ int main() {
             switch (choice) {
             case 1:
                 if (flag == false) {
-                    cout << "First time using the programm, please select desired capacity: ";
-                    cin >> capacity;
-                    keeper.setCapacity(capacity);
+                    //cout << "First time using the programm, please select desired capacity: ";
+                    //cin >> capacity;
+                    //keeper.setCapacity(capacity);
                     flag = true;
                 }
                 if (flag) {
@@ -201,6 +201,7 @@ int main() {
             cerr << "Exception: " << e.what() << endl;
         }
         cout << "Press any key to continue...";
+        _getch();
         cin.ignore();
     } while (choice != 8);
 

@@ -1,11 +1,11 @@
-Capacity: 10
+Capacity: 4
 Instrument 1 (Drum):
 ---------------------------
-Name: AME
+Name: NAME
 Cost: 2304
 Quantity: 3
 Owner: SASHA
-Type of drum: KREKER
+Type of drum: Kreker
 ---------------------------
 Instrument 2 (Brass):
 ---------------------------
@@ -14,14 +14,14 @@ Cost: 300
 Quantity: 2
 Owner: kirill
 Manufacturer: yamaha
-Defects: broken limb
+Defects: Broken Limb
 ---------------------------
 Instrument 3 (Brass):
 ---------------------------
-Name: Nameofinstrument
+Name: nameofinstrument
 Cost: 500
 Quantity: 2
-Owner: Mikhail
-Manufacturer: Zavod
-Defects: Broke the tube
+Owner: mikhail
+Manufacturer: Ural Zavod
+Defects: broke the tube
 ---------------------------
