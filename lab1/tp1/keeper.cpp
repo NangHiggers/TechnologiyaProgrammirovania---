@@ -8,6 +8,9 @@ Keeper::Keeper() {
 }
 
 Keeper::Keeper(int capacity) {
+    if (capacity <= 0) {
+        throw invalid_argument("Capacity must be a positive value.");
+    }
     instruments = new Base * [capacity];
     numInstruments = 0;
 }
@@ -34,7 +37,7 @@ void Keeper::addInstrument(Base* instrument) {
             cout << "Enter the new capacity: ";
             cin >> newCapacity;
             if (newCapacity <= capacity) {
-                cout << "New capacity must be greater than the current capacity." << endl;
+                throw invalid_argument("New capacity must be greater than the current capacity.");
             }
             else {
                 Base** newInstruments = new Base * [newCapacity];
@@ -57,13 +60,15 @@ void Keeper::addInstrument(Base* instrument) {
 }
 
 void Keeper::removeInstrument(int index) {
-    if (index >= 0 && index < numInstruments) {
-        delete instruments[index];
-        for (int i = index; i < numInstruments - 1; i++) {
-            instruments[i] = instruments[i + 1];
-        }
-        numInstruments--;
+    if (index < 0 || index >= numInstruments) {
+        throw out_of_range("Invalid index for removing an instrument.");
     }
+
+    delete instruments[index];
+    for (int i = index; i < numInstruments - 1; i++) {
+        instruments[i] = instruments[i + 1];
+    }
+    numInstruments--;
 }
 
 void Keeper::displayAllInstruments() {
@@ -80,8 +85,7 @@ Base* Keeper::getInstrument(int index) const {
         return instruments[index];
     }
     else {
-        //
-        return nullptr; //
+        return nullptr;
     }
 }
 
@@ -96,7 +100,7 @@ void Keeper::saveToFile(const string& filename) const {
             if (instrument) {
                 file << "Instrument " << i + 1 << " (" << instrument->getType() << "):" << endl;
                 file << "---------------------------" << endl;
-                instrument->displayInfoToFile(file);
+                file << *instrument;
                 file << "---------------------------" << endl;
             }
         }
@@ -183,4 +187,7 @@ void Keeper::loadFromFile(const string& filename) {
     else {
         cout << "Failed to open the file for reading." << endl;
     }
+}
+void Keeper::setCapacity(int newCapacity) {
+    capacity = newCapacity;
 }

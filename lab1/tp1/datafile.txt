@@ -1,4 +1,4 @@
-Capacity: 2
+Capacity: 10
 Instrument 1 (Drum):
 ---------------------------
 Name: AME
@@ -15,4 +15,13 @@ Quantity: 2
 Owner: kirill
 Manufacturer: yamaha
 Defects: broken limb
+---------------------------
+Instrument 3 (Brass):
+---------------------------
+Name: Nameofinstrument
+Cost: 500
+Quantity: 2
+Owner: Mikhail
+Manufacturer: Zavod
+Defects: Broke the tube
 ---------------------------

@@ -17,6 +17,7 @@ public:
     Base* getInstrument(int index) const;
     void saveToFile(const string& filename) const;
     void loadFromFile(const string& filename);
+    void setCapacity(int newCapacity);
 
 private:
     Base** instruments;

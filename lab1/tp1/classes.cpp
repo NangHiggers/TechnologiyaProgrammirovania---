@@ -1,11 +1,18 @@
 #include "classes.h"
 
 Base::Base(const string& name, double cost, int quantity, const string& owner) : name(name), cost(cost), quantity(quantity), owner(owner) {
-    cout << "Called base constructor" << endl;
+    if (cost < 0) {
+        throw invalid_argument("Cost cannot be negative.");
+    }
+    if (quantity < 0) {
+        throw invalid_argument("Quantity cannot be negative.");
+    }
+
+    cout << "Called Base constructor" << endl;
 }
 
 Base::~Base() {
-    cout << "Called base destructor" << endl;
+    cout << "Called Base destructor" << endl;
 }
 
 void Base::displayInfo() const {
@@ -14,12 +21,6 @@ void Base::displayInfo() const {
     cout << "Quantity: " << quantity << endl;
     cout << "Owner: " << owner << endl;
 }
-void Base::displayInfoToFile(ostream& output) const {
-    output << "Name: " << name << endl;
-    output << "Cost: " << cost << endl;
-    output << "Quantity: " << quantity << endl;
-    output << "Owner: " << owner << endl;
-}
 void Base::edit() {
     cout << "Select the parameter to edit:" << endl;
     cout << "1. Name" << endl;
@@ -27,18 +28,25 @@ void Base::edit() {
     cout << "3. Quantity" << endl;
     cout << "4. Owner" << endl;
 }
+ostream& Base::displayInfoToFile(ostream& output) const {
+    output << "Name: " << name << endl;
+    output << "Cost: " << cost << endl;
+    output << "Quantity: " << quantity << endl;
+    output << "Owner: " << owner << endl;
+    return output;
+}
 
 Drum::Drum(const string& name, double cost, int quantity, const string& owner, const string& drumType) : Base(name, cost, quantity, owner), drumType(drumType) {
     cout << "Called Drum constructor" << endl;
 }
 
+Drum::~Drum() {
+    cout << "Called Drum destructor" << endl;
+}
+
 void Drum::displayInfo() const {
     Base::displayInfo();
     cout << "Type of drum: " << drumType << endl;
-}
-void Drum::displayInfoToFile(ostream& output) const {
-    Base::displayInfoToFile(output);
-    output << "Type of drum: " << drumType << endl;
 }
 void Drum::edit() {
     int editParameter;
@@ -89,6 +97,11 @@ void Drum::edit() {
         cout << "Invalid parameter choice." << endl;
     }
 }
+ostream& Drum::displayInfoToFile(ostream& output) const {
+    Base::displayInfoToFile(output);
+    output << "Type of drum: " << drumType << endl;
+    return output;
+}
 string Drum::getType() const {
     return "Drum";
 }
@@ -96,16 +109,14 @@ string Drum::getType() const {
 Stringed::Stringed(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& description) : Base(name, cost, quantity, owner), manufacturer(manufacturer), description(description) {
     cout << "Called Stringed constructor" << endl;
 }
+Stringed::~Stringed() {
+    cout << "Called Stringed destructor" << endl;
+}
 
 void Stringed::displayInfo() const {
     Base::displayInfo();
     cout << "Manufacturer: " << manufacturer << endl;
     cout << "Description: " << description << endl;
-}
-void Stringed::displayInfoToFile(ostream& output) const {
-    Base::displayInfoToFile(output);
-    output << "Manufacturer: " << manufacturer << endl;
-    output << "Description: " << description << endl;
 }
 void Stringed::edit() {
     int editParameter;
@@ -165,6 +176,12 @@ void Stringed::edit() {
         cout << "Invalid parameter choice." << endl;
     }
 }
+ostream& Stringed::displayInfoToFile(ostream& output) const {
+    Base::displayInfoToFile(output);
+    output << "Manufacturer: " << manufacturer << endl;
+    output << "Description: " << description << endl;
+    return output;
+}
 string Stringed::getType() const {
     return "Stringed";
 }
@@ -172,16 +189,14 @@ string Stringed::getType() const {
 Brass::Brass(const string& name, double cost, int quantity, const string& owner, const string& manufacturer, const string& defects) : Base(name, cost, quantity, owner), manufacturer(manufacturer), defects(defects) {
     cout << "Called Brass constructor" << endl;
 }
+Brass::~Brass() {
+    cout << "Called Brass destructor" << endl;
+}
 
 void Brass::displayInfo() const {
     Base::displayInfo();
     cout << "Manufacturer: " << manufacturer << endl;
     cout << "Defects: " << defects << endl;
-}
-void Brass::displayInfoToFile(ostream& output) const {
-    Base::displayInfoToFile(output);
-    output << "Manufacturer: " << manufacturer << endl;
-    output << "Defects: " << defects << endl;
 }
 void Brass::edit() {
     int editParameter;
@@ -241,6 +256,16 @@ void Brass::edit() {
         cout << "Invalid parameter choice." << endl;
     }
 }
+ostream& Brass::displayInfoToFile(ostream& output) const {
+    Base::displayInfoToFile(output);
+    output << "Manufacturer: " << manufacturer << endl;
+    output << "Defects: " << defects << endl;
+    return output;
+}
 string Brass::getType() const {
     return "Brass";
+}
+
+ostream& operator<<(ostream& output, const Base& obj) {
+    return obj.displayInfoToFile(output);
 }
