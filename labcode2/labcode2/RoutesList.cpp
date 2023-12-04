@@ -3,8 +3,9 @@
 
 using namespace std;
 
-RoutesList::RoutesList() : routes(nullptr), currentSize(0) { }
+RoutesList::RoutesList() : routes(nullptr), currentSize(0) { cout << "called for unparometrized routeslist constructor" << endl; }
 RoutesList::~RoutesList() {
+    cout << "called for routelist destructor" << endl;
     for (int i = 0; i < currentSize; ++i) {
         delete routes[i];
     }

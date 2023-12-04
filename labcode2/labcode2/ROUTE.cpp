@@ -1,10 +1,11 @@
 #include "ROUTE.h"
 #include <iostream>
 
-ROUTE::ROUTE() : RouteNum(0), StartingPoint(""), EndingPoint("") {}
-ROUTE::ROUTE(int RouteNum, const string& StartingPoint, const string& EndingPoint) : RouteNum(RouteNum), StartingPoint(StartingPoint), EndingPoint(EndingPoint) {}
-ROUTE::~ROUTE() {}
-
+ROUTE::ROUTE() : RouteNum(0), StartingPoint(""), EndingPoint("") { cout << "called for unparometrized route constructor" << endl; }
+ROUTE::ROUTE(int RouteNum, const string& StartingPoint, const string& EndingPoint) : RouteNum(RouteNum), StartingPoint(StartingPoint), EndingPoint(EndingPoint) {
+    cout << "called for parometrized route constructor" << endl;
+}
+ROUTE::~ROUTE() { cout << "called for destructor" << endl; }
 string ROUTE::getStartingPoint() const {
     return StartingPoint;
 }
