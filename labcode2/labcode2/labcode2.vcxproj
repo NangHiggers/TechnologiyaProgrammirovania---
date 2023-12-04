@@ -128,6 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="labcode2.cpp" />
+    <ClCompile Include="ROUTE.cpp" />
+    <ClCompile Include="RoutesList.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ROUTE.h" />
+    <ClInclude Include="RoutesList.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

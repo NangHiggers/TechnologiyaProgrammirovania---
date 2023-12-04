@@ -24,4 +24,3 @@ private:
 	string EndingPoint;
 	int RouteNum;
 };
-
