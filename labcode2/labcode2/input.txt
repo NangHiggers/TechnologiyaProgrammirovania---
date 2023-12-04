@@ -1,0 +1,4 @@
+Hello, how are you? This is an example text file.
+It contains some words for testing purposes.
+There are various words here, such as apple, orange, and banana.
+The quick brown fox jumps over the lazy dog.

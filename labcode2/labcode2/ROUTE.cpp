@@ -39,9 +39,13 @@ ostream& operator<<(ostream& os, const ROUTE& route) {
 istream& operator>>(istream& is, ROUTE& route) {
     cout << "Enter Route Number: ";
     is >> route.RouteNum;
+
     cout << "Enter Starting Point: ";
-    is >> route.StartingPoint;
+    is.ignore();
+    getline(is, route.StartingPoint);
+
     cout << "Enter Ending Point: ";
-    is >> route.EndingPoint;
+    getline(is, route.EndingPoint);
+
     return is;
 }

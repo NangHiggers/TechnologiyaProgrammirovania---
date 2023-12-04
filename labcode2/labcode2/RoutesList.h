@@ -8,6 +8,7 @@ public:
 	~RoutesList();
 
 	void addRoute(const ROUTE& route);
+	void deleteRoute(int routeNumber);
 	void sortRoutes();
 	void displayRoute(int routeNumber) const;
 	void displayAllRoutes() const;
